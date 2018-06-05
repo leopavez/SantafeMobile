@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.leandro.combustiblesapp.Buscadorcard">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Buscar por patente:"
+        android:paddingTop="40dp"
+        android:textColor="#000"
+        android:textSize="15dp"
+        android:paddingBottom="20dp"
+        android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="60dp">
+
+        <EditText
+            android:id="@+id/txtpatentebuscador"
+            android:layout_width="match_parent"
+            android:textColorLink="#4a589e"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:paddingTop="20dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/ic_airport_shuttle_black_24dp"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Patente" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnbuscarxpatente"
+        android:onClick="ShowPopup"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="135dp"
+        android:textColor="#ffffff"
+        android:layout_marginLeft="140dp"
+        android:background="@drawable/btnredondo"
+        android:elevation="0dp"
+        android:gravity="center"
+        android:text="Buscar"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="145dp"
+        android:gravity="center"
+        android:text="Buscar por solicitud:"
+        android:paddingTop="60dp"
+        android:textColor="#000"
+        android:textSize="15dp"
+        android:paddingBottom="20dp"
+        android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="230dp">
+
+        <EditText
+            android:id="@+id/txtsolicitud"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/ic_event_note_black_24dp"
+            android:drawablePadding="10dp"
+            android:inputType="number"
+            android:ems="10"
+            android:hint="Solicitud"
+            android:paddingTop="10dp"
+            android:phoneNumber="true"
+            android:textColorLink="#4a589e" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnbuscarxsolicitud"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="100dp"
+        android:onClick="onClicksolicitud"
+        android:layout_height="35dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginLeft="140dp"
+        android:background="@drawable/btnredondo"
+        android:elevation="0dp"
+        android:gravity="center"
+        android:text="Buscar" />
+
+
+    <Button
+        android:id="@+id/btnverlistado"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="390dp"
+        android:background="@drawable/btnredondo"
+        android:elevation="0dp"
+        android:gravity="center"
+        android:text="Ver listado" />
+
+    <Button
+        android:id="@+id/btnvolver"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="390dp"
+        android:background="@drawable/btnredondo"
+        android:elevation="0dp"
+        android:gravity="center"
+        android:text="VOLVER INICIO" />
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:gravity="center"
+        android:layout_marginTop="440dp"
+        android:text="Puede buscar por patente o por número de solicitud."
+        android:paddingTop="20dp"
+        android:textColor="#000" />
+
+</FrameLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="167dp"
+        android:paddingBottom="50dp"
+        android:src="@mipmap/logo" />
+
+    <Button
+        android:id="@+id/botonbluetooth"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/botonbuscarbluetooth"
+        android:layout_alignBottom="@+id/botonbuscarbluetooth"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_toEndOf="@+id/botonbuscarbluetooth"
+        android:layout_toRightOf="@+id/botonbuscarbluetooth"
+        android:background="@drawable/btnredondo"
+        android:gravity="center"
+        android:onClick="ClickBluetooth"
+        android:text="Bluetooth" />
+
+    <Button
+        android:id="@+id/botonbuscarbluetooth"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/btnredondo"
+        android:gravity="center"
+        android:onClick="Clickenabledisable_discoverable"
+        android:text="BUSCAR" />
+
+    <ListView
+        android:id="@+id/listdispositivos"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/botonbluetooth"
+        android:layout_marginTop="44dp" />
+
+</RelativeLayout>

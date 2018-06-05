@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.leandro.combustiblesapp">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".MainActivity"
+            android:label="SantaFe Mobile">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".bluetooth"
+                  android:label="Prueba de bluetooth"></activity>
+        <activity android:name=".perfilmenunuevo"
+            android:label="Combustibles">
+        </activity>
+        <activity android:name=".Buscadorcard"
+            android:label="Buscador">
+
+        </activity>
+        <activity android:name=".Listadodescargado"
+            android:label="Buscador">
+
+        </activity>
+        <activity android:name=".DescargarCard"
+            android:label="Descargar listado">
+
+        </activity>
+        <activity android:name=".listadosolicitud"
+        android:label="Buscador">
+         </activity>
+        <activity android:name=".Main_Activity"
+            android:label="Main">
+
+        </activity>
+
+        <activity android:name=".DeviceListActivity"
+            android:label="Main">
+        </activity>
+
+        <activity android:name=".PantallaDeCarga"
+            android:label="Entrega petroleo">
+        </activity>
+
+
+        <activity android:name=".ListadoCard"
+            android:label="Entrega petroleo">
+        </activity>
+    </application>
+
+</manifest>

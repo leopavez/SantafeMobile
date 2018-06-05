@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_scan"
+            android:layout_width="180dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:text="BUSCAR IMPRESORAS"
+            android:textColor="#ffffff"
+            android:background="@drawable/btnredondo"/>
+
+        <Button
+            android:id="@+id/Send_Button"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="IMPRIMIR"
+            android:textColor="#ffffff"
+            android:background="@drawable/btnredondo"></Button>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

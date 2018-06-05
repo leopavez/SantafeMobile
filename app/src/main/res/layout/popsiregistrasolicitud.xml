@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="320dp"
+    android:layout_height="190dp"
+    android:layout_gravity="center"
+    android:background="#b5c3d0"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/txtcerrarpopsi"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="X"
+        android:textColor="#ffffff"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+
+            android:id="@+id/textpatentesi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@+id/txtpatentepopup"
+            android:layout_toStartOf="@+id/txtpatentepopup"
+            android:text="PATENTE:"
+            android:textColor="#000"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="44dp"
+            tools:layout_editor_absoluteY="79dp" />
+
+        <TextView
+            android:id="@+id/txtpatentepopup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textpatentesi"
+            android:layout_alignBottom="@+id/textpatentesi"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="23dp"
+            android:layout_marginStart="23dp"
+            android:layout_toEndOf="@+id/btncancelar"
+            android:layout_toRightOf="@+id/btncancelar"
+            android:text="PATENTE"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textpatentesi"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="11dp"
+            android:text="N°Sol:"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:id="@+id/textnsol" />
+
+        <TextView
+            android:id="@+id/txtnsolicitudpopup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textnsol"
+            android:layout_alignBottom="@+id/textnsol"
+            android:layout_alignLeft="@+id/textpatentesi"
+            android:layout_alignStart="@+id/textpatentesi"
+            android:layout_gravity="center_horizontal"
+            android:text="Solicitud"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textlts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtnsolicitudpopup"
+            android:layout_alignBottom="@+id/txtnsolicitudpopup"
+            android:layout_alignLeft="@+id/txtpatentepopup"
+            android:layout_alignStart="@+id/txtpatentepopup"
+            android:text="Lts a cargar:"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtltsacargarpopup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textlts"
+            android:layout_alignBottom="@+id/textlts"
+            android:layout_marginLeft="11dp"
+            android:layout_marginStart="11dp"
+            android:layout_toEndOf="@+id/textlts"
+            android:layout_toRightOf="@+id/textlts"
+            android:text="Litros"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textlugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textnsol"
+            android:layout_alignRight="@+id/textnsol"
+            android:layout_below="@+id/textnsol"
+            android:layout_marginTop="19dp"
+            android:text="Lugar:"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtlugarpopup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textlugar"
+            android:layout_alignBottom="@+id/textlugar"
+            android:layout_alignLeft="@+id/txtnsolicitudpopup"
+            android:layout_alignStart="@+id/txtnsolicitudpopup"
+            android:text="Lugar"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/btncancelar"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="85dp"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_toEndOf="@+id/textnsol"
+            android:layout_toRightOf="@+id/textnsol"
+            android:background="@drawable/btnredondo"
+            android:gravity="center"
+            android:text="CANCELAR"
+            tools:layout_editor_absoluteX="135dp"
+            tools:layout_editor_absoluteY="66dp" />
+
+        <Button
+            android:id="@+id/btncargarpopup"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="65dp"
+            android:layout_height="35dp"
+            android:layout_alignEnd="@+id/txtpatentepopup"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/txtpatentepopup"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btnredondo"
+            android:gravity="center"
+            android:text="CARGAR"
+            tools:layout_editor_absoluteX="135dp"
+            tools:layout_editor_absoluteY="66dp" />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

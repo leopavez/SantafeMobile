@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textviewpatenteentrega"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text=">Patente:"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="50dp"/>
+
+        <TextView
+            android:id="@+id/txtpatenteentrega"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="200dp"
+            android:text=">Patente"
+            android:textColor="#000" />
+
+
+        <TextView
+            android:id="@+id/textviewnlitros"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text=">N° Litros:"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="50dp"
+            />
+
+        <TextView
+            android:id="@+id/txtlitrosacargarentrega"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=">N° Litros:"
+            android:textColor="#000"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="200dp"
+            />
+
+        <TextView
+            android:id="@+id/texviewoperador"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text=">Operador:"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginTop="130dp"
+            android:layout_marginLeft="50dp"
+            />
+
+        <TextView
+            android:id="@+id/txtoperador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=">Operador:"
+            android:textColor="#000"
+            android:layout_marginTop="130dp"
+            android:layout_marginLeft="200dp"
+            />
+
+        <TextView
+            android:id="@+id/textviewlugarentrega"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text=">Lugar de entrega:"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginTop="170dp"
+            android:layout_marginLeft="50dp"
+            />
+
+        <TextView
+            android:id="@+id/txtlugarentrega"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=">Lugar de entrega:"
+            android:textColor="#000"
+            android:layout_marginTop="170dp"
+            android:layout_marginLeft="200dp"
+            />
+
+        <TextView
+            android:id="@+id/textviewtipovehiculo"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text=">Tipo de vehiculo:"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginTop="210dp"
+            android:layout_marginLeft="50dp"
+        />
+
+        <TextView
+            android:id="@+id/txttipovehiculo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=">Tipo de vehiculo:"
+            android:textColor="#000"
+            android:layout_marginTop="210dp"
+            android:layout_marginLeft="200dp"
+            />
+
+        <TextView
+            android:id="@+id/textviewobra"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text=">Obra:"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginTop="250dp"
+            android:layout_marginLeft="50dp"
+            />
+
+        <TextView
+            android:id="@+id/txtobra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=">Obra:"
+            android:textColor="#000"
+            android:layout_marginTop="250dp"
+            android:layout_marginLeft="200dp"
+            />
+
+        <TextView
+            android:id="@+id/textviewnsolicitud"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text=">N° Solicitud:"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginTop="290dp"
+            android:layout_marginLeft="50dp"
+            />
+
+        <TextView
+            android:id="@+id/txtnsolicitudentrega"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=">N° Solicitud:"
+            android:textColor="#000"
+            android:layout_marginTop="290dp"
+            android:layout_marginLeft="200dp"
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="310dp">
+
+            <EditText
+                android:id="@+id/editodometro"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_directions_car_black_24dp"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Odometro"
+                android:inputType="number"
+                android:paddingTop="10dp"
+                android:phoneNumber="true"
+                android:textColorLink="#4a589e" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="380dp">
+
+            <EditText
+                android:id="@+id/editlitroscargados"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_local_gas_station_black_24dp"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="Litros cargados"
+                android:inputType="number"
+                android:paddingTop="10dp"
+                android:phoneNumber="true"
+                android:textColorLink="#4a589e" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnguardareimprimir"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="160dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="450dp"
+            android:background="@drawable/btnredondo"
+            android:elevation="0dp"
+            android:gravity="center"
+            android:text="GUARDAR E IMPRIMIR" />
+
+        <Button
+            android:id="@+id/btnvolversinguardar"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="160dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="500dp"
+            android:background="@drawable/btnredondo"
+            android:elevation="0dp"
+            android:gravity="center"
+            android:text="VOLVER SIN GUARDAR" />
+
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
