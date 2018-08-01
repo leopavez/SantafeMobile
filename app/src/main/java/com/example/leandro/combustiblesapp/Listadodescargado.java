@@ -42,7 +42,6 @@ public class Listadodescargado extends AppCompatActivity {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     Date date = new Date();
-    String camion_id;
     String fecha = dateFormat.format(date);
     Button imprimir_btn;
 

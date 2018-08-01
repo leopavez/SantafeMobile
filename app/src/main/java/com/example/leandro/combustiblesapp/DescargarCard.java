@@ -37,6 +37,7 @@ public class DescargarCard extends AppCompatActivity{
     DatabaseHelper myDB;
     Button descargarlistado;
     Button volveramenu;
+    Button borrardb;
     Spinner simplespinner;
 
     ArrayList<String> listadeldia;
@@ -51,9 +52,7 @@ public class DescargarCard extends AppCompatActivity{
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     Date date = new Date();
-    String camion_id;
     String fecha = dateFormat.format(date);
-    Button imprimir_btn;
     private boolean isFirst = true;
     Button enviardatos;
 
@@ -67,6 +66,16 @@ public class DescargarCard extends AppCompatActivity{
         Bundle extras = intent.getExtras();
         final String nom = extras.getString("NOM");
         final String ape = extras.getString("APEL");
+        borrardb = (Button)findViewById(R.id.btnborrardb);
+
+        borrardb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SQLiteDatabase db = myDB.getWritableDatabase();
+
+                db.execSQL("DELETE FROM listado");
+            }
+        });
 
 
         myDB = new DatabaseHelper(this);

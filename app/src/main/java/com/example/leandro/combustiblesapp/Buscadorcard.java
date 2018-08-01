@@ -227,8 +227,9 @@ public class Buscadorcard extends AppCompatActivity {
         solicitud = (EditText) findViewById(R.id.txtsolicitud);
         buscar = (Button) findViewById(R.id.btnbuscarxsolicitud);
         String s = solicitud.getText().toString();
+        String estado="PENDIENTE";
 
-        Cursor cursor =db.rawQuery("SELECT id_estatico, solicitud,unegocio, patente, lasignados,ubicacion,tipo_vehiculo,qrecibe FROM listado WHERE solicitud='"+s+"'",null);
+        Cursor cursor =db.rawQuery("SELECT id_estatico, solicitud,unegocio, patente, lasignados,ubicacion,tipo_vehiculo,qrecibe FROM listado WHERE solicitud='"+s+"' and estado='"+estado+"'",null);
 
         if (s.isEmpty()){
             Toast.makeText(getApplicationContext(),"CAMPO SOLICITUD VACIO",Toast.LENGTH_SHORT).show();

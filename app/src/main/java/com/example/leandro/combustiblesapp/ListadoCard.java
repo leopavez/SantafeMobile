@@ -105,9 +105,12 @@ public class ListadoCard extends AppCompatActivity {
         SQLiteDatabase db = myDB.getReadableDatabase();
         com.example.leandro.combustiblesapp.solicitudes sol = null;
         String estado="PENDIENTE";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date();
+        String fecha = dateFormat.format(date);
 
         listasolicitudes= new ArrayList<solicitudes>();
-        Cursor cursor = db.rawQuery("SELECT id_estatico,solicitud,unegocio, patente, lasignados,ubicacion,tipo_vehiculo,qrecibe FROM listado WHERE estado='"+estado+"'",null);
+        Cursor cursor = db.rawQuery("SELECT id_estatico,solicitud,unegocio, patente, lasignados,ubicacion,tipo_vehiculo,qrecibe FROM listado WHERE estado='"+estado+"' AND fecha='"+fecha+"''" ,null);
 
         while (cursor.moveToNext()){
             sol= new solicitudes();
