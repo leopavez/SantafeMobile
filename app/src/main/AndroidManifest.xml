@@ -25,8 +25,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".bluetooth"
-                  android:label="Prueba de bluetooth"></activity>
         <activity android:name=".perfilmenunuevo"
             android:label="Combustibles">
         </activity>
@@ -50,17 +48,17 @@
 
         </activity>
 
-        <activity android:name=".DeviceListActivity"
-            android:label="Main">
-        </activity>
-
         <activity android:name=".PantallaDeCarga"
             android:label="Entrega petroleo">
         </activity>
 
 
         <activity android:name=".ListadoCard"
-            android:label="Entrega petroleo">
+        android:label="Entrega petroleo">
+    </activity>
+
+        <activity android:name=".DeviceListActivity"
+            android:label="DeviceList">
         </activity>
     </application>
 

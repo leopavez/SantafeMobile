@@ -24,11 +24,10 @@ import java.util.Locale;
 
 public class perfilmenunuevo extends AppCompatActivity implements View.OnClickListener{
 
-    DatabaseHelper myDB;
+    DatabaseHelper myDB = new DatabaseHelper(this);
     Dialog popnopatente;
     Dialog popsipatente;
-    Button imprimir_btn;
-    private CardView listado_Card,buscardor_Card,descargar_Card,enviardatos_Card;
+    private CardView listado_Card,buscardor_Card,descargar_Card,impresora_Card;
 
     solicitudes sol = new solicitudes();
 

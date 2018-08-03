@@ -50,7 +50,6 @@ public class Listadodescargado extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listadodescargado);
         getSupportActionBar().hide();
-        imprimir_btn = (Button) findViewById(R.id.botonbluetooth);
         solicitudes= (TextView) findViewById(R.id.solicitudestxt);
         patentes= (TextView) findViewById(R.id.patentestxt);
         asignados= (TextView) findViewById(R.id.listrosasignados);

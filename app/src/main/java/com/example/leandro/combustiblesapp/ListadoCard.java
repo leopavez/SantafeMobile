@@ -110,7 +110,7 @@ public class ListadoCard extends AppCompatActivity {
         String fecha = dateFormat.format(date);
 
         listasolicitudes= new ArrayList<solicitudes>();
-        Cursor cursor = db.rawQuery("SELECT id_estatico,solicitud,unegocio, patente, lasignados,ubicacion,tipo_vehiculo,qrecibe FROM listado WHERE estado='"+estado+"' AND fecha='"+fecha+"''" ,null);
+        Cursor cursor = db.rawQuery("SELECT id_estatico,solicitud,unegocio, patente, lasignados,ubicacion,tipo_vehiculo,qrecibe FROM listado WHERE estado='"+estado+"' AND fentrega='"+fecha+"'" ,null);
 
         while (cursor.moveToNext()){
             sol= new solicitudes();
