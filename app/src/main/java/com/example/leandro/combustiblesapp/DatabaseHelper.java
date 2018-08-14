@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String ESTADO="estado";
 
     final String CREAR_TABLA_LISTADO="CREATE TABLE listado (id_estatico TEXT unique, solicitud TEXT, unegocio TEXT, fentrega TEXT, patente TEXT, tipo_vehiculo TEXT, ubicacion TEXT, litros TEXT, lasignados TEXT, qrecibe TEXT,estado TEXT)";
-    final String CREAR_TABLA_LISTADO2="CREATE TABLE cargado (id_estatico TEXT, solicitud TEXT, unegocio TEXT, fentrega TEXT, hentrega TEXT, patente TEXT, tipo_vehiculo TEXT, ubicacion TEXT,estado TEXT,odometro TEXT, lcargados TEXT)";
+    final String CREAR_TABLA_LISTADO2="CREATE TABLE cargado (id_estatico TEXT, solicitud TEXT, unegocio TEXT, fentrega TEXT, hentrega TEXT, patente TEXT, tipo_vehiculo TEXT, ubicacion TEXT,estado TEXT,odometro TEXT, lcargados TEXT, qcarga TEXT)";
     final String CREAR_TABLA_USUARIO="CREATE TABLE usuario (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, usuario TEXT, password TEXT, nombre TEXT, apellido TEXT)";
 
     public DatabaseHelper(Context context) {

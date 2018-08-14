@@ -13,12 +13,13 @@ public class cargado {
     String estado= "";
     String odometro="";
     String lcargados="";
+    String qrecibe="";
 
     public cargado() {
 
     }
 
-    public cargado(String id_estatico, String solicitud, String unegocio, String fentrega, String hentrega, String patente, String tvehiculo, String ubicacion, String estado, String odometro, String lcargados) {
+    public cargado(String id_estatico, String solicitud, String unegocio, String fentrega, String hentrega, String patente, String tvehiculo, String ubicacion, String estado, String odometro, String lcargados, String qrecibe) {
         this.id_estatico = id_estatico;
         this.solicitud = solicitud;
         this.unegocio = unegocio;
@@ -30,6 +31,7 @@ public class cargado {
         this.estado = estado;
         this.odometro = odometro;
         this.lcargados = lcargados;
+        this.qrecibe = qrecibe;
     }
 
     public String getId_estatico() {
@@ -118,6 +120,14 @@ public class cargado {
 
     public void setLcargados(String lcargados) {
         this.lcargados = lcargados;
+    }
+
+    public String getQrecibe(){
+        return qrecibe;
+    }
+
+    public void setQrecibe(String qrecibe){
+        this.qrecibe = qrecibe;
     }
 }
 

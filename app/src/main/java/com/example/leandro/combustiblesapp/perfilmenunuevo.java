@@ -95,6 +95,12 @@ public class perfilmenunuevo extends AppCompatActivity implements View.OnClickLi
             alertalistado.setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+
+                    SQLiteDatabase db = myDB.getWritableDatabase();
+
+
+                    db.execSQL("DELETE FROM listado");
+
                     Intent intent = getIntent();
                     Bundle extras = intent.getExtras();
                     final String nom = extras.getString("NOMBRE");

@@ -67,16 +67,6 @@ public class DescargarCard extends AppCompatActivity{
         Bundle extras = intent.getExtras();
         final String nom = extras.getString("NOM");
         final String ape = extras.getString("APEL");
-        borrardb = (Button)findViewById(R.id.btnborrardb);
-
-        borrardb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SQLiteDatabase db = myDB.getWritableDatabase();
-
-                db.execSQL("DELETE FROM listado");
-            }
-        });
 
 
         myDB = new DatabaseHelper(this);
@@ -269,12 +259,23 @@ public class DescargarCard extends AppCompatActivity{
                                                     sol.qrecibe= jsonObject.getString("qrecibe");
                                                     sol.estado="PENDIENTE";
 
-                                                    myDB.insertDataListado(sol.id_estatico, sol.solicitud_id, sol.unegocio, sol.fentrega, sol.patente, sol.tvehiculo, sol.ubicacion, sol.litros,
-                                                            sol.lasignados,sol.qrecibe,sol.estado);
+                                                    SQLiteDatabase db = myDB.getWritableDatabase();
 
+                                                    Cursor cursor = db.rawQuery("SELECT * FROM listado WHERE id_estatico='"+sol.id_estatico+"'",null);
+                                                    boolean esta=true;
 
+                                                    if (cursor.getCount()<=0){
 
+                                                        esta=false;
+                                                        myDB.insertDataListado(sol.id_estatico, sol.solicitud_id, sol.unegocio, sol.fentrega, sol.patente, sol.tvehiculo, sol.ubicacion, sol.litros,
+                                                                sol.lasignados,sol.qrecibe,sol.estado);
+                                                        Log.d("MSG","AGREGADO A TU LISTADO!");
 
+                                                    }else{
+                                                        esta=true;
+                                                        Log.d("MSG","CAMPO REPETIDO");
+
+                                                    }
 
                                                 }
                                                 Toast.makeText(getApplicationContext(),"Tu listado se descargo correctamente",Toast.LENGTH_SHORT).show();
@@ -341,12 +342,23 @@ public class DescargarCard extends AppCompatActivity{
                                                         sol.qrecibe= jsonObject.getString("qrecibe");
                                                         sol.estado="PENDIENTE";
 
-                                                        myDB.insertDataListado(sol.id_estatico, sol.solicitud_id, sol.unegocio, sol.fentrega, sol.patente, sol.tvehiculo, sol.ubicacion, sol.litros,
-                                                                sol.lasignados,sol.qrecibe,sol.estado);
+                                                        SQLiteDatabase db = myDB.getWritableDatabase();
 
+                                                        Cursor cursor = db.rawQuery("SELECT * FROM listado WHERE id_estatico='"+sol.id_estatico+"'",null);
+                                                        boolean esta=true;
 
+                                                        if (cursor.getCount()<=0){
 
+                                                            esta=false;
+                                                            myDB.insertDataListado(sol.id_estatico, sol.solicitud_id, sol.unegocio, sol.fentrega, sol.patente, sol.tvehiculo, sol.ubicacion, sol.litros,
+                                                                    sol.lasignados,sol.qrecibe,sol.estado);
+                                                            Log.d("MSG","AGREGADO A TU LISTADO!");
 
+                                                        }else{
+                                                            esta=true;
+                                                            Log.d("MSG","CAMPO REPETIDO");
+
+                                                        }
 
                                                     }
                                                     Toast.makeText(getApplicationContext(),"Tu listado se descargo correctamente",Toast.LENGTH_SHORT).show();
@@ -382,7 +394,7 @@ public class DescargarCard extends AppCompatActivity{
         SQLiteDatabase db = myDB.getReadableDatabase();
 
         listacargado= new ArrayList<cargado>();
-        cursor = db.rawQuery("SELECT id_estatico,fentrega,odometro, lcargados FROM cargado",null);
+        cursor = db.rawQuery("SELECT id_estatico,fentrega,odometro, lcargados, hentrega, qcarga FROM cargado",null);
 
         while (cursor.moveToNext()){
             car = new cargado();
@@ -390,6 +402,7 @@ public class DescargarCard extends AppCompatActivity{
             car.setFentrega(cursor.getString(1));
             car.setOdometro(cursor.getString(2));
             car.setLcargados(cursor.getString(3));
+            car.setHentrega(cursor.getString(4));
 
             listacargado.add(car);
 
@@ -413,14 +426,7 @@ public class DescargarCard extends AppCompatActivity{
                 json.put("frentrega",listacargado.get(i).getFentrega().toString());
                 json.put("horometro",listacargado.get(i).getOdometro().toString());
                 json.put("lcargados",listacargado.get(i).getLcargados().toString());
-
-   //             Uri.Builder builder = new Uri.Builder()
-     //                   .appendQueryParameter("id",listacargado.get(i).getId_estatico())
-       //                 .appendQueryParameter("frentrega",listacargado.get(i).getFentrega())
-         //               .appendQueryParameter("horometro",listacargado.get(i).getOdometro())
-           //             .appendQueryParameter("lcargados",listacargado.get(i).getLcargados());
-             //   String query = builder.build().getEncodedQuery();
-
+                json.put("loghora",listacargado.get(i).getHentrega().toString());
                 OutputStreamWriter out = new   OutputStreamWriter(conn.getOutputStream());
                 out.write(json.toString());
                 out.close();
@@ -429,6 +435,8 @@ public class DescargarCard extends AppCompatActivity{
 
                 if (responseCode == HttpURLConnection.HTTP_OK){
                     Toast.makeText(getApplicationContext(),"DATOS ENVIADOS CORRECTAMENTE",Toast.LENGTH_SHORT).show();
+                    db.execSQL("DELETE FROM cargado");
+
                 }else{
                     Toast.makeText(getApplicationContext(),"DATOS NO ENVIADOS",Toast.LENGTH_SHORT).show();
                 }
@@ -440,6 +448,7 @@ public class DescargarCard extends AppCompatActivity{
                 e.printStackTrace();
             }
         }
+
 
 
     }

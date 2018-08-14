@@ -111,9 +111,6 @@ public class Main_Activity extends Activity implements Runnable {
                             OutputStream os = mBluetoothSocket
                                     .getOutputStream();
                             Handler mHandler= new Handler(Looper.getMainLooper());
-
-
-
                             Intent intent = getIntent();
                             Bundle extras = intent.getExtras();
                             final String patente = extras.getString("patente");
@@ -180,7 +177,7 @@ public class Main_Activity extends Activity implements Runnable {
                             String msg3 = " "+" "+" "+" "+" "+" "+" "+"Entrega petroleo "+" "+" "+" "+"\n"+
                                     " "+" "+" "+" "+" "+" "+" "+"N° Vale: "+id_estati+" "+" "+" "+"\n"+
                                     " " +"\n"+
-                                    " " + "Fecha: "+ f +"\n"+
+                                    " " + "Fecha: "+ f + h +"\n"+
                                     " " + "Patente: "+ p +"\n"+
                                     " " + "Solicitud: "+ soli +"\n"+
                                     " " + "Obra: "+ obr +"\n"+
@@ -219,7 +216,7 @@ public class Main_Activity extends Activity implements Runnable {
         SQLiteDatabase db = myDB.getWritableDatabase();
         String estado="CARGADO";
         db.execSQL("UPDATE listado SET estado='CARGADO' WHERE solicitud='"+solicitud+"' AND patente='"+patente+"'");
-        db.execSQL("INSERT INTO cargado (id_estatico, solicitud, unegocio, fentrega, hentrega, patente, tipo_vehiculo, ubicacion, estado, odometro, lcargados) VALUES ('"+id_estatico+"','"+soli+"','"+obra+"','"+fecha+"','"+hora+"','"+p+"','"+t_ve+"','"+lugar_de_entrega+"','"+estado+"','"+odom+"','"+lentre+"')");
+        db.execSQL("INSERT INTO cargado (id_estatico, solicitud, unegocio, fentrega, hentrega, patente, tipo_vehiculo, ubicacion, estado, odometro, lcargados, qcarga) VALUES ('"+id_estatico+"','"+soli+"','"+obra+"','"+fecha+"','"+hora+"','"+p+"','"+t_ve+"','"+lugar_de_entrega+"','"+estado+"','"+odom+"','"+lentre+"','"+entre+"')");
 
 
     }// onCreate
