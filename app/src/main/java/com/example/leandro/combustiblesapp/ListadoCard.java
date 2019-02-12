@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,10 +38,10 @@ public class ListadoCard extends AppCompatActivity {
     Cursor cursor;
     ListView lista;
     ArrayList<String> listadeldia;
-    ArrayList<solicitudes> listasolicitudes;
+    ArrayList<Solicitudes> listasolicitudes;
 
 
-    solicitudes sol = new solicitudes();
+    Solicitudes sol = new Solicitudes();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,34 +67,33 @@ public class ListadoCard extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                Intent intent = getIntent();
-                Bundle extras = intent.getExtras();
-                final String nom = extras.getString("NOM");
-                final String ape = extras.getString("APEL");
-                String patente=""+listasolicitudes.get(pos).getPatente();
-                String litros=""+listasolicitudes.get(pos).getLasignados();
-                String ope=""+listasolicitudes.get(pos).getQrecibe();
-                String lugarentrega=""+listasolicitudes.get(pos).getUbicacion();
-                String tipov=""+listasolicitudes.get(pos).getTvehiculo();
-                String obra=""+listasolicitudes.get(pos).getUnegocio();
-                String s=""+listasolicitudes.get(pos).getSolicitud_id();
-                String id_es=""+listasolicitudes.get(pos).getId_estatico();
-                Intent nuevoform= new Intent(ListadoCard.this, PantallaDeCarga.class);
-                nuevoform.putExtra("PATENTEACARGAR",patente);
-                nuevoform.putExtra("NLITROS",litros);
-                nuevoform.putExtra("QRECIBE",ope);
-                nuevoform.putExtra("LUGARENTREGA",lugarentrega);
-                nuevoform.putExtra("TIPOVEHICULO",tipov);
-                nuevoform.putExtra("OBRA",obra);
-                nuevoform.putExtra("S",s);
-                nuevoform.putExtra("ID_ES",id_es);
-                nuevoform.putExtra("NOMBR",nom);
-                nuevoform.putExtra("APELL",ape);
+
+                    Intent intent = getIntent();
+                    Bundle extras = intent.getExtras();
+                    final String nom = extras.getString("NOM");
+                    final String ape = extras.getString("APEL");
+                    String patente=""+listasolicitudes.get(pos).getPatente();
+                    String litros=""+listasolicitudes.get(pos).getLasignados();
+                    String ope=""+listasolicitudes.get(pos).getQrecibe();
+                    String lugarentrega=""+listasolicitudes.get(pos).getUbicacion();
+                    String tipov=""+listasolicitudes.get(pos).getTvehiculo();
+                    String obra=""+listasolicitudes.get(pos).getUnegocio();
+                    String s=""+listasolicitudes.get(pos).getSolicitud_id();
+                    String id_es=""+listasolicitudes.get(pos).getId_estatico();
+                    Intent nuevoform= new Intent(ListadoCard.this, PantallaDeCarga.class);
+                    nuevoform.putExtra("PATENTEACARGAR",patente);
+                    nuevoform.putExtra("NLITROS",litros);
+                    nuevoform.putExtra("QRECIBE",ope);
+                    nuevoform.putExtra("LUGARENTREGA",lugarentrega);
+                    nuevoform.putExtra("TIPOVEHICULO",tipov);
+                    nuevoform.putExtra("OBRA",obra);
+                    nuevoform.putExtra("S",s);
+                    nuevoform.putExtra("ID_ES",id_es);
+                    nuevoform.putExtra("NOMBR",nom);
+                    nuevoform.putExtra("APELL",ape);
 
 
-                startActivity(nuevoform);
-
-
+                    startActivity(nuevoform);
             }
         });
 
@@ -103,17 +103,17 @@ public class ListadoCard extends AppCompatActivity {
 
     private void consultarlistadodeldia(){
         SQLiteDatabase db = myDB.getReadableDatabase();
-        com.example.leandro.combustiblesapp.solicitudes sol = null;
+        Solicitudes sol = null;
         String estado="PENDIENTE";
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         Date date = new Date();
         String fecha = dateFormat.format(date);
 
-        listasolicitudes= new ArrayList<solicitudes>();
+        listasolicitudes= new ArrayList<Solicitudes>();
         Cursor cursor = db.rawQuery("SELECT id_estatico,solicitud,unegocio, patente, lasignados,ubicacion,tipo_vehiculo,qrecibe FROM listado WHERE estado='"+estado+"' AND fentrega='"+fecha+"'" ,null);
 
         while (cursor.moveToNext()){
-            sol= new solicitudes();
+            sol= new Solicitudes();
             sol.setId_estatico(cursor.getString(0));
             sol.setSolicitud_id(cursor.getString(1));
             sol.setUnegocio(cursor.getString(2));

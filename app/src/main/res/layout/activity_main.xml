@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="128dp"
         android:paddingTop="20dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logosantafe" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"

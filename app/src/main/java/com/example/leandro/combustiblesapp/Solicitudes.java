@@ -1,6 +1,6 @@
 package com.example.leandro.combustiblesapp;
 
-public class solicitudes {
+public class Solicitudes {
 
 
     String id_estatico="";
@@ -15,7 +15,7 @@ public class solicitudes {
     String qrecibe="";
     String estado="";
 
-    public solicitudes(String id_estatico,String solicitud_id, String unegocio, String fentrega, String patente, String tvehiculo, String ubicacion, String litros, String lasignados, String qrecibe, String estado) {
+    public Solicitudes(String id_estatico, String solicitud_id, String unegocio, String fentrega, String patente, String tvehiculo, String ubicacion, String litros, String lasignados, String qrecibe, String estado) {
         this.id_estatico = id_estatico;
         this.solicitud_id = solicitud_id;
         this.unegocio = unegocio;
@@ -29,7 +29,7 @@ public class solicitudes {
         this.estado = estado;
     }
 
-    public solicitudes() {
+    public Solicitudes() {
 
     }
 

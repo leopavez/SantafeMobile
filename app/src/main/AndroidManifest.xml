@@ -25,14 +25,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".perfilmenunuevo"
+        <activity android:name=".Menu"
             android:label="Combustibles">
         </activity>
         <activity android:name=".Buscadorcard"
-            android:label="Buscador">
-
-        </activity>
-        <activity android:name=".Listadodescargado"
             android:label="Buscador">
 
         </activity>
@@ -60,6 +56,19 @@
         <activity android:name=".DeviceListActivity"
             android:label="DeviceList">
         </activity>
+
+        <activity android:name=".Ajustes"
+            android:label="Configuracion de la App">
+        </activity>
+
+        <activity android:name=".Seleccionsurtidor"
+            android:label="Selecciona surtidor">
+        </activity>
+        <activity android:name=".Seleccionimpresora"
+            android:label="Selecciona impresora">
+        </activity>
+
+
     </application>
 
 </manifest>

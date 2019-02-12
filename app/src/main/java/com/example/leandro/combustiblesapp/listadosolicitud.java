@@ -20,10 +20,10 @@ public class listadosolicitud extends AppCompatActivity {
     Cursor cursor;
     ListView lista;
     ArrayList<String> listadeldia;
-    ArrayList<solicitudes> listasolicitudes;
+    ArrayList<Solicitudes> listasolicitudes;
     DatabaseHelper myDB;
 
-    solicitudes sol = new solicitudes();
+    Solicitudes sol = new Solicitudes();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -78,16 +78,16 @@ public class listadosolicitud extends AppCompatActivity {
 
     private void consultarlistadodeldia(){
         SQLiteDatabase db = myDB.getReadableDatabase();
-        com.example.leandro.combustiblesapp.solicitudes sol = null;
+        Solicitudes sol = null;
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         final String solicitud = extras.getString("SOLICITUDXBUSCAR");
-        listasolicitudes= new ArrayList<solicitudes>();
+        listasolicitudes= new ArrayList<Solicitudes>();
         String estado="PENDIENTE";
         Cursor cursor = db.rawQuery("SELECT id_estatico, solicitud,unegocio, patente, lasignados,ubicacion,tipo_vehiculo,qrecibe FROM listado WHERE solicitud='"+solicitud+"' AND estado='"+estado+"'",null);
 
         while (cursor.moveToNext()){
-            sol= new solicitudes();
+            sol= new Solicitudes();
             sol.setId_estatico(cursor.getString(0));
             sol.setSolicitud_id(cursor.getString(1));
             sol.setUnegocio(cursor.getString(2));

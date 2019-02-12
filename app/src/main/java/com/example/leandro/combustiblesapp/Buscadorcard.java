@@ -30,7 +30,7 @@ public class Buscadorcard extends AppCompatActivity {
     Dialog popsipatente;
 
     ArrayList<String> listadeldia;
-    ArrayList<solicitudes> listasolicitudes;
+    ArrayList<Solicitudes> listasolicitudes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class Buscadorcard extends AppCompatActivity {
                 Bundle extras = intent.getExtras();
                 final String nom = extras.getString("NOM");
                 final String ape = extras.getString("APEL");
-                Intent nuevoform= new Intent(Buscadorcard.this, perfilmenunuevo.class);
+                Intent nuevoform= new Intent(Buscadorcard.this, Menu.class);
                 nuevoform.putExtra("NOMBRE",nom);
                 nuevoform.putExtra("APELLIDO",ape);
                 startActivity(nuevoform);
@@ -87,7 +87,7 @@ public class Buscadorcard extends AppCompatActivity {
         if (p.isEmpty()) {
             Toast.makeText(getApplicationContext(),"CAMPO PATENTE VACIO",Toast.LENGTH_SHORT).show();
         } else  if(cursor.moveToFirst()==true){
-            solicitudes sol = new solicitudes();
+            Solicitudes sol = new Solicitudes();
             TextView txtcerrarpopsi;
             TextView textpatentesi;
             TextView txtpatentepopup;
@@ -111,7 +111,7 @@ public class Buscadorcard extends AppCompatActivity {
             txtlugarpopup= (TextView)popsipatente.findViewById(R.id.txtlugarpopup);
             btncancelar = (Button)popsipatente.findViewById(R.id.btncancelar);
             btnbtncargarpopup= (Button)popsipatente.findViewById(R.id.btncargarpopup);
-            sol= new solicitudes();
+            sol= new Solicitudes();
             sol.setId_estatico(cursor.getString(0));
             sol.setSolicitud_id(cursor.getString(1));
             sol.setUnegocio(cursor.getString(2));
@@ -151,7 +151,7 @@ public class Buscadorcard extends AppCompatActivity {
                     SQLiteDatabase db = myDB.getWritableDatabase();
 
                     Cursor cursor =db.rawQuery("SELECT id_estatico,solicitud,unegocio, patente, lasignados,ubicacion,tipo_vehiculo,qrecibe FROM listado WHERE patente='"+p+"'",null);
-                    solicitudes sol = new solicitudes();
+                    Solicitudes sol = new Solicitudes();
                     if(cursor.moveToFirst()==true){
                         sol.setId_estatico(cursor.getString(0));
                         sol.setSolicitud_id(cursor.getString(1));

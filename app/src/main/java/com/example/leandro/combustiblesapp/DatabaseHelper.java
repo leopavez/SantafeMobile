@@ -28,9 +28,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String QRECIBE="qrecibe";
     public static final String ESTADO="estado";
 
+    public static final String idsurtidor="id_surtidor";
+
+    public static final String mascara="mascara";
+
     final String CREAR_TABLA_LISTADO="CREATE TABLE listado (id_estatico TEXT unique, solicitud TEXT, unegocio TEXT, fentrega TEXT, patente TEXT, tipo_vehiculo TEXT, ubicacion TEXT, litros TEXT, lasignados TEXT, qrecibe TEXT,estado TEXT)";
-    final String CREAR_TABLA_LISTADO2="CREATE TABLE cargado (id_estatico TEXT, solicitud TEXT, unegocio TEXT, fentrega TEXT, hentrega TEXT, patente TEXT, tipo_vehiculo TEXT, ubicacion TEXT,estado TEXT,odometro TEXT, lcargados TEXT, qcarga TEXT)";
-    final String CREAR_TABLA_USUARIO="CREATE TABLE usuario (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, usuario TEXT, password TEXT, nombre TEXT, apellido TEXT)";
+    final String CREAR_TABLA_CARGADO="CREATE TABLE cargado (id_estatico TEXT, solicitud TEXT, unegocio TEXT, fentrega TEXT, hentrega TEXT, patente TEXT, tipo_vehiculo TEXT, ubicacion TEXT,estado TEXT,odometro TEXT, lcargados TEXT, qcarga TEXT)";
+    final String CREAR_TABLA_USUARIO="CREATE TABLE usuario (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, usuario TEXT unique, password TEXT, nombre TEXT, apellido TEXT)";
+    final String PARAMETROS_SURTIDOR="CREATE TABLE surtidor (id INTEGER PRIMARY KEY AUTOINCREMENT, id_surtidor TEXT)";
+    final String PARAMETROS_IMPRESORA="CREATE TABLE impresora (id INTEGER PRIMARY KEY AUTOINCREMENT, mascara TEXT)";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -40,7 +46,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         db.execSQL(CREAR_TABLA_LISTADO);
         db.execSQL(CREAR_TABLA_USUARIO);
-        db.execSQL(CREAR_TABLA_LISTADO2);
+        db.execSQL(CREAR_TABLA_CARGADO);
+        db.execSQL(PARAMETROS_SURTIDOR);
+        db.execSQL(PARAMETROS_IMPRESORA);
 
     }
 
@@ -50,10 +58,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS listado");
         db.execSQL("DROP TABLE IF EXISTS usuario");
         db.execSQL("DROP TABLE IF EXISTS cargado");
+        db.execSQL("DROP TABLE IF EXISTS surtidor");
+        db.execSQL("DROP TABLE IF EXISTS impresora");
 
         db.execSQL(CREAR_TABLA_USUARIO);
         db.execSQL(CREAR_TABLA_LISTADO);
-        db.execSQL(CREAR_TABLA_LISTADO2);
+        db.execSQL(CREAR_TABLA_CARGADO);
+        db.execSQL(PARAMETROS_SURTIDOR);
+        db.execSQL(PARAMETROS_IMPRESORA);
     }
 
     public boolean eliminardatos(){
@@ -97,5 +109,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean insertSurtidor(String id_surtidor){
+
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(idsurtidor,id_surtidor);
+            db.insert("surtidor",null,contentValues);
+            return true;
+
+        }catch (Exception exp) {
+            exp.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean insertarImpresoraMask(String address){
+        try{
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(mascara,address);
+            db.insert("impresora",null,contentValues);
+            return true;
+        }catch (Exception exp){
+            exp.printStackTrace();
+            return false;
+        }
+    }
 
 }

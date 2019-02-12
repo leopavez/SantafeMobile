@@ -206,11 +206,11 @@
             android:layout_width="160dp"
             android:layout_height="35dp"
             android:layout_marginLeft="110dp"
-            android:layout_marginTop="450dp"
+            android:layout_marginTop="465dp"
             android:background="@drawable/btnredondo"
             android:elevation="0dp"
             android:gravity="center"
-            android:text="GUARDAR E IMPRIMIR" />
+            android:text="IMPRIMIR" />
 
         <Button
             android:id="@+id/btnvolversinguardar"
@@ -218,7 +218,7 @@
             android:layout_width="160dp"
             android:layout_height="35dp"
             android:layout_marginLeft="110dp"
-            android:layout_marginTop="500dp"
+            android:layout_marginTop="550dp"
             android:background="@drawable/btnredondo"
             android:elevation="0dp"
             android:gravity="center"

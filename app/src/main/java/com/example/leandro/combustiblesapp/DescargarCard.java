@@ -1,6 +1,5 @@
 package com.example.leandro.combustiblesapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,16 +41,18 @@ import java.util.Locale;
 public class DescargarCard extends AppCompatActivity{
 
     //SCRIPT PARA DESCARGAR EL LISTADO DEL DIA.
+
+    private static final String TAG =DescargarCard.class.getName() ;
     DatabaseHelper myDB;
     Button descargarlistado;
     Button volveramenu;
-    Button borrardb;
     Spinner simplespinner;
 
-    ArrayList<String> listadeldia;
-    ArrayList<cargado> listacargado;
-    ArrayList<solicitudes> listasolicitudes;
-    cargado car = new cargado();
+    ArrayList<Cargado> listacargado;
+    Cargado car = new Cargado();
+
+    private RequestQueue mRequestQueue;
+    private StringRequest mStringRequest;
 
     Cursor cursor;
     final static String urlsanta = "http://santafeinversiones.com/services/listado";
@@ -62,7 +70,6 @@ public class DescargarCard extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.descargarcard);
         getSupportActionBar().hide();
-        final Listadodescargado lis = new Listadodescargado();
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         final String nom = extras.getString("NOM");
@@ -70,6 +77,8 @@ public class DescargarCard extends AppCompatActivity{
 
 
         myDB = new DatabaseHelper(this);
+
+        final SQLiteDatabase db = myDB.getWritableDatabase();
 
 
         descargarlistado = (Button)findViewById(R.id.btndescargarlistado);
@@ -79,7 +88,7 @@ public class DescargarCard extends AppCompatActivity{
         volveramenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent nuevoform= new Intent(DescargarCard.this, perfilmenunuevo.class);
+                Intent nuevoform= new Intent(DescargarCard.this, Menu.class);
                 nuevoform.putExtra("NOMBRE",nom);
                 nuevoform.putExtra("APELLIDO",ape);
                 startActivity(nuevoform);
@@ -103,6 +112,7 @@ public class DescargarCard extends AppCompatActivity{
         simpleList.add("KFHD13");
         simpleList.add("GBSP72");
         simpleList.add("MAPEL");
+        simpleList.add("MOLINA");
 
         final ArrayAdapter<String> simpleAdapter= new ArrayAdapter<>(DescargarCard.this,R.layout.support_simple_spinner_dropdown_item,simpleList);
         simplespinner.setAdapter(simpleAdapter);
@@ -127,83 +137,17 @@ public class DescargarCard extends AppCompatActivity{
                                     public void onClick(View view) {
                                         String idpatente = "2";
 
-                                        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                                        StrictMode.setThreadPolicy(policy);
-
-                                        URL url = null;
-                                        HttpURLConnection conn;
-
-                                        try {
-                                            url = new URL(urlsanta + "/" + fecha + "/" + idpatente);
-                                            conn = (HttpURLConnection) url.openConnection();
-                                            conn.setRequestMethod("GET");
-                                            conn.connect();
-                                            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-                                            String inputLine;
-                                            StringBuffer response = new StringBuffer();
-                                            String json = "";
-
-                                            while ((inputLine = in.readLine()) != null) {
-                                                response.append(inputLine);
-                                            }
-
-
-                                            json = response.toString();
-                                            JSONArray jsonarr = null;
-                                            jsonarr = new JSONArray(json);
-
-                                            solicitudes sol = new solicitudes();
-
-
-                                            boolean isInserted;
-                                            for (int i = 0; i < jsonarr.length(); i++) {
-                                                JSONObject jsonObject = jsonarr.getJSONObject(i);
-                                                Log.d("SALIDABUENA",jsonObject.toString());
+                                        Cursor cursor = db.rawQuery("SELECT id_surtidor FROM surtidor",null);
+                                        if (cursor.moveToFirst()==true){
+                                            db.execSQL("DELETE FROM surtidor");
 
 
 
-                                                sol.id_estatico=jsonObject.getString("id");
-                                                sol.solicitud_id = jsonObject.getString("solicitud_id");
-                                                sol.unegocio = jsonObject.getString("unegocio");
-                                                sol.fentrega = jsonObject.getString("fentrega");
-                                                sol.patente = jsonObject.getString("patente");
-                                                sol.tvehiculo = jsonObject.getString("tvehiculo");
-                                                sol.ubicacion = jsonObject.getString("ubicacion");
-                                                sol.litros = jsonObject.getString("litros");
-                                                sol.lasignados = jsonObject.getString("lasignados");
-                                                sol.qrecibe= jsonObject.getString("qrecibe");
-                                                sol.estado="PENDIENTE";
 
-
-                                                SQLiteDatabase db = myDB.getWritableDatabase();
-
-                                                Cursor cursor = db.rawQuery("SELECT * FROM listado WHERE id_estatico='"+sol.id_estatico+"'",null);
-                                                boolean esta=true;
-
-                                                if (cursor.getCount()<=0){
-
-                                                    esta=false;
-                                                    myDB.insertDataListado(sol.id_estatico, sol.solicitud_id, sol.unegocio, sol.fentrega, sol.patente, sol.tvehiculo, sol.ubicacion, sol.litros,
-                                                            sol.lasignados,sol.qrecibe,sol.estado);
-                                                    Log.d("MSG","AGREGADO A TU LISTADO!");
-
-                                                }else{
-                                                    esta=true;
-                                                    Log.d("MSG","CAMPO REPETIDO");
-
-                                                }
-
-                                            }
-                                            Toast.makeText(getApplicationContext(),"Tu listado se descargo correctamente",Toast.LENGTH_SHORT).show();
-
-                                        } catch (MalformedURLException e) {
-                                            e.printStackTrace();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                                        }else{
                                         }
+
+
                                     }
                                 });
                             }else{
@@ -238,7 +182,7 @@ public class DescargarCard extends AppCompatActivity{
                                                 JSONArray jsonarr = null;
                                                 jsonarr = new JSONArray(json);
 
-                                                solicitudes sol = new solicitudes();
+                                                Solicitudes sol = new Solicitudes();
 
 
                                                 boolean isInserted;
@@ -321,7 +265,7 @@ public class DescargarCard extends AppCompatActivity{
                                                     JSONArray jsonarr = null;
                                                     jsonarr = new JSONArray(json);
 
-                                                    solicitudes sol = new solicitudes();
+                                                    Solicitudes sol = new Solicitudes();
 
 
                                                     boolean isInserted;
@@ -373,6 +317,91 @@ public class DescargarCard extends AppCompatActivity{
                                             }
                                         });
 
+                                    }else{
+                                        if (simpleList.get(i)=="MOLINA"){
+                                            descargarlistado.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    String idpatente= "6";
+                                                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                                                    StrictMode.setThreadPolicy(policy);
+
+                                                    URL url = null;
+                                                    HttpURLConnection conn;
+
+                                                    try {
+                                                        url = new URL(urlsanta + "/" + fecha + "/" + idpatente);
+                                                        conn = (HttpURLConnection) url.openConnection();
+                                                        conn.setRequestMethod("GET");
+                                                        conn.connect();
+                                                        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                                                        String inputLine;
+                                                        StringBuffer response = new StringBuffer();
+                                                        String json = "";
+
+                                                        while ((inputLine = in.readLine()) != null) {
+                                                            response.append(inputLine);
+                                                        }
+
+
+                                                        json = response.toString();
+                                                        JSONArray jsonarr = null;
+                                                        jsonarr = new JSONArray(json);
+
+                                                        Solicitudes sol = new Solicitudes();
+
+
+                                                        boolean isInserted;
+                                                        for (int i = 0; i < jsonarr.length(); i++) {
+                                                            JSONObject jsonObject = jsonarr.getJSONObject(i);
+                                                            Log.d("SALIDABUENA",jsonObject.toString());
+
+
+                                                            sol.id_estatico=jsonObject.getString("id");
+                                                            sol.solicitud_id = jsonObject.getString("solicitud_id");
+                                                            sol.unegocio = jsonObject.getString("unegocio");
+                                                            sol.fentrega = jsonObject.getString("fentrega");
+                                                            sol.patente = jsonObject.getString("patente");
+                                                            sol.tvehiculo = jsonObject.getString("tvehiculo");
+                                                            sol.ubicacion = jsonObject.getString("ubicacion");
+                                                            sol.litros = jsonObject.getString("litros");
+                                                            sol.lasignados = jsonObject.getString("lasignados");
+                                                            sol.qrecibe= jsonObject.getString("qrecibe");
+                                                            sol.estado="PENDIENTE";
+
+                                                            SQLiteDatabase db = myDB.getWritableDatabase();
+
+                                                            Cursor cursor = db.rawQuery("SELECT * FROM listado WHERE id_estatico='"+sol.id_estatico+"'",null);
+                                                            boolean esta=true;
+
+                                                            if (cursor.getCount()<=0){
+
+                                                                esta=false;
+                                                                myDB.insertDataListado(sol.id_estatico, sol.solicitud_id, sol.unegocio, sol.fentrega, sol.patente, sol.tvehiculo, sol.ubicacion, sol.litros,
+                                                                        sol.lasignados,sol.qrecibe,sol.estado);
+                                                                Log.d("MSG","AGREGADO A TU LISTADO!");
+
+                                                            }else{
+                                                                esta=true;
+                                                                Log.d("MSG","CAMPO REPETIDO");
+
+                                                            }
+
+                                                        }
+                                                        Toast.makeText(getApplicationContext(),"Tu listado se descargo correctamente",Toast.LENGTH_SHORT).show();
+
+                                                    } catch (MalformedURLException e) {
+                                                        e.printStackTrace();
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            });
+
+                                        }
                                     }
                                 }
                             }
@@ -393,11 +422,11 @@ public class DescargarCard extends AppCompatActivity{
     private void consultarlistadodeldia(){
         SQLiteDatabase db = myDB.getReadableDatabase();
 
-        listacargado= new ArrayList<cargado>();
+        listacargado= new ArrayList<Cargado>();
         cursor = db.rawQuery("SELECT id_estatico,fentrega,odometro, lcargados, hentrega, qcarga FROM cargado",null);
 
         while (cursor.moveToNext()){
-            car = new cargado();
+            car = new Cargado();
             car.setId_estatico(cursor.getString(0));
             car.setFentrega(cursor.getString(1));
             car.setOdometro(cursor.getString(2));
@@ -449,6 +478,72 @@ public class DescargarCard extends AppCompatActivity{
             }
         }
 
+
+
+    }
+
+
+    public void descargarListado(String id){
+
+        //SCRIPT DE DESCARGA DEL LISTADO
+
+        if(cursor.moveToFirst()==true){
+
+            String url = urlsanta+fecha+id;
+            mRequestQueue = Volley.newRequestQueue(this);
+            mStringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+
+                        String json;
+                        json = response.toString();
+                        JSONArray jsonarr = null;
+                        jsonarr = new JSONArray();
+                        Solicitudes sol = new Solicitudes();
+
+
+                        for (int i = 0; i < jsonarr.length(); i++) {
+                            JSONObject jsonObject = jsonarr.getJSONObject(i);
+                            sol.id_estatico = jsonObject.getString("id");
+                            sol.solicitud_id = jsonObject.getString("solicitud_id");
+                            sol.unegocio = jsonObject.getString("unegocio");
+                            sol.fentrega = jsonObject.getString("fentrega");
+                            sol.patente = jsonObject.getString("patente");
+                            sol.tvehiculo = jsonObject.getString("tvehiculo");
+                            sol.ubicacion = jsonObject.getString("ubicacion");
+                            sol.litros = jsonObject.getString("litros");
+                            sol.lasignados = jsonObject.getString("lasignados");
+                            sol.qrecibe = jsonObject.getString("qrecibe");
+                            sol.estado = "PENDIENTE";
+
+                            SQLiteDatabase db = myDB.getWritableDatabase();
+
+                            Cursor cursor = db.rawQuery("SELECT * FROM listado WHERE id_estatico='" + sol.id_estatico + "'", null);
+                            boolean esta = true;
+
+                            if (cursor.getCount() <= 0) {
+
+                                esta = false;
+                                myDB.insertDataListado(sol.id_estatico, sol.solicitud_id, sol.unegocio, sol.fentrega, sol.patente, sol.tvehiculo, sol.ubicacion, sol.litros,
+                                        sol.lasignados, sol.qrecibe, sol.estado);
+
+                            }
+                        }
+
+                    } catch (JSONException e) {
+
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i(TAG,"Error de conexion: "+error.toString());
+                }
+            });
+            mRequestQueue.add(mStringRequest);
+        }
 
 
     }

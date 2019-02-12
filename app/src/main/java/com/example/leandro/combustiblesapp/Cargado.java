@@ -1,6 +1,6 @@
 package com.example.leandro.combustiblesapp;
 
-public class cargado {
+public class Cargado {
 
     String id_estatico="";
     String solicitud = "";
@@ -15,11 +15,11 @@ public class cargado {
     String lcargados="";
     String qrecibe="";
 
-    public cargado() {
+    public Cargado() {
 
     }
 
-    public cargado(String id_estatico, String solicitud, String unegocio, String fentrega, String hentrega, String patente, String tvehiculo, String ubicacion, String estado, String odometro, String lcargados, String qrecibe) {
+    public Cargado(String id_estatico, String solicitud, String unegocio, String fentrega, String hentrega, String patente, String tvehiculo, String ubicacion, String estado, String odometro, String lcargados, String qrecibe) {
         this.id_estatico = id_estatico;
         this.solicitud = solicitud;
         this.unegocio = unegocio;

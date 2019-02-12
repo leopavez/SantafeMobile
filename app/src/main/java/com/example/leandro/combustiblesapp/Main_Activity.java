@@ -3,8 +3,12 @@ package com.example.leandro.combustiblesapp;
 //SCRIPT DE LA IMPRESORA TERMICA
 //SCRIPT DE LA IMPRESORA TERMICA
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,8 +26,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -43,7 +45,7 @@ public class Main_Activity extends Activity implements Runnable {
 
     Cursor cursor;
     DatabaseHelper myDB;
-    solicitudes sol = new solicitudes();
+    Solicitudes sol = new Solicitudes();
     MainActivity principal = new MainActivity();
 
 
@@ -58,7 +60,6 @@ public class Main_Activity extends Activity implements Runnable {
         final String obra = extras.getString("obra");
         final String litrosasignados = extras.getString("litrosasignados");
         final String litroscargados = extras.getString("litroscargados");
-        final String entregadopor = extras.getString("entregadopor");
         final String odo= extras.getString("odometro");
         final String nom= extras.getString("nombresur");
         final String ape= extras.getString("apesur");
@@ -194,7 +195,7 @@ public class Main_Activity extends Activity implements Runnable {
                             os.write(msg3.getBytes());
                             onDestroy();
 
-                            Intent nuevoform= new Intent(Main_Activity.this, perfilmenunuevo.class);
+                            Intent nuevoform= new Intent(Main_Activity.this, Menu.class);
                             nuevoform.putExtra("NOMBRE",nom);
                             nuevoform.putExtra("APELLIDO",ape);
                             startActivity(nuevoform);
@@ -219,7 +220,120 @@ public class Main_Activity extends Activity implements Runnable {
         db.execSQL("INSERT INTO cargado (id_estatico, solicitud, unegocio, fentrega, hentrega, patente, tipo_vehiculo, ubicacion, estado, odometro, lcargados, qcarga) VALUES ('"+id_estatico+"','"+soli+"','"+obra+"','"+fecha+"','"+hora+"','"+p+"','"+t_ve+"','"+lugar_de_entrega+"','"+estado+"','"+odom+"','"+lentre+"','"+entre+"')");
 
 
-    }// onCreate
+    }//
+
+    public void imprimir2(String address) throws Exception{
+
+        try{
+
+            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+            if  ((mBluetoothAdapter == null) || (!mBluetoothAdapter.isEnabled())){
+                throw new Exception("Bluetooth adapter no esta funcionando o no esta habilitado");
+            }
+
+            mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(address);
+            mBluetoothSocket = mBluetoothDevice.createRfcommSocketToServiceRecord(applicationUUID);
+            mBluetoothAdapter.cancelDiscovery();
+            mBluetoothSocket.connect();
+            OutputStream os = mBluetoothSocket.getOutputStream();
+            InputStream is = mBluetoothSocket.getInputStream();
+            Handler mHandler= new Handler(Looper.getMainLooper());
+
+
+
+
+            String msg2 = " "+" "+" "+" "+" "+" "+" "+"Entrega petroleo "+" "+" "+" "+"\n";
+
+            os.write(msg2.getBytes());
+
+            mBluetoothSocket.close();
+
+        } catch (Exception e) {
+            Log.e("MainActivity", "Exe ", e);
+        }
+    }
+
+
+
+    public void imprimir(String fecha, String hora,String patente, String solicitud,String obra,String asignados, String cargados
+    , String odometro,String cargadopor,String id_estatico,String address) throws Exception{
+
+        try{
+
+                mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+                if  ((mBluetoothAdapter == null) || (!mBluetoothAdapter.isEnabled())){
+                    throw new Exception("Bluetooth adapter no esta funcionando o no esta habilitado");
+                }
+
+                mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(address);
+                mBluetoothSocket = mBluetoothDevice.createRfcommSocketToServiceRecord(applicationUUID);
+                mBluetoothAdapter.cancelDiscovery();
+                mBluetoothSocket.connect();
+                OutputStream os = mBluetoothSocket.getOutputStream();
+                InputStream is = mBluetoothSocket.getInputStream();
+                Handler mHandler= new Handler(Looper.getMainLooper());
+
+
+
+
+                String msg2 = " "+" "+" "+" "+" "+" "+" "+"Entrega petroleo "+" "+" "+" "+"\n"+
+                        " "+" "+" "+" "+" "+" "+" "+"N Vale: "+id_estatico+" "+" "+" "+"\n"+
+                        " " +"\n"+
+                        " " + "Fecha: "+ fecha +" "+ hora +"\n"+
+                        " " + "Patente: "+ patente +"\n"+
+                        " " + "Solicitud: "+ solicitud +"\n"+
+                        " " + "Obra: "+ obra +"\n"+
+                        " " + "L. Asignados: "+ asignados +"\n"+
+                        " " + "L. Cargados: "+ cargados +"\n"+
+                        " " + "Entregado: "+ cargadopor+"\n"+
+                        " " + "Odometro: "+ odometro+"\n"+
+                        " " +"\n"+
+                        " " +"\n"+
+                        " " + "RUT:..........................." +"\n"+
+                        " " +"\n"+
+                        " " +"\n"+
+                        " " + "Nombre:........................" +"\n"+
+                        " " +"\n"+
+                        " " +"\n"+
+                        " " + "Firma:........................." +"\n"+
+                        " " +"\n"+
+                        " " +"\n"+
+                        " "+" "+" "+" "+" "+" "+" "+"Copia departamento "+" "+" "+" "+"\n"+
+                        " " +"\n"+
+                        " " +"\n"+
+                        " " +"\n";
+
+                os.write(msg2.getBytes());
+
+                Thread.sleep(8000);
+
+                String msg3 = " "+" "+" "+" "+" "+" "+" "+"Entrega petroleo "+" "+" "+" "+"\n"+
+                        " "+" "+" "+" "+" "+" "+" "+"N Vale: "+id_estatico+" "+" "+" "+"\n"+
+                        " " +"\n"+
+                        " " + "Fecha: "+ fecha +" "+ hora+"\n"+
+                        " " + "Patente: "+ patente +"\n"+
+                        " " + "Solicitud: "+ solicitud +"\n"+
+                        " " + "Obra: "+ obra +"\n"+
+                        " " + "L. Asignados: "+ asignados +"\n"+
+                        " " + "L. Cargados: "+ cargados +"\n"+
+                        " " + "Entregado: "+ cargadopor+"\n"+
+                        " " + "Odometro: "+ odometro+"\n"+
+                        " " +"\n"+
+                        " " +"\n"+
+                        " "+" "+" "+" "+" "+" "+" "+"Copia Cliente "+" "+" "+" "+"\n"+
+                        " " +"\n"+
+                        " " +"\n";
+
+                os.write(msg3.getBytes());
+
+                mBluetoothSocket.close();
+
+        } catch (Exception e) {
+            Log.e("MainActivity", "Exe ", e);
+        }
+    }
 
     @Override
     protected void onDestroy() {
