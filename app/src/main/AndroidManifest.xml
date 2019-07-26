@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.leandro.combustiblesapp">
+    package="com.ingenieria.leandro.combustiblesapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH"/>
@@ -11,9 +11,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_combustiblesapp"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_combustiblesapp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -57,6 +57,9 @@
             android:label="DeviceList">
         </activity>
 
+        <activity android:name=".Reportes"
+            android:label="Reportes">
+        </activity>
         <activity android:name=".Ajustes"
             android:label="Configuracion de la App">
         </activity>
@@ -67,6 +70,10 @@
         <activity android:name=".Seleccionimpresora"
             android:label="Selecciona impresora">
         </activity>
+        <activity android:name=".listadocargado"
+            android:label="Listado cargados">
+        </activity>
+
 
 
     </application>

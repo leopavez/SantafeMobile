@@ -5,7 +5,7 @@
     android:layout_gravity="center"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context="com.example.leandro.combustiblesapp.ImpresoraCard">
+    tools:context="com.ingenieria.leandro.combustiblesapp.ImpresoraCard">
 
 
     <Button

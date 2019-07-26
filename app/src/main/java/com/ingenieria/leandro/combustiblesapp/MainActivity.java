@@ -1,9 +1,16 @@
-package com.example.leandro.combustiblesapp;
+package com.ingenieria.leandro.combustiblesapp;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
      * Proyecto CombustiblesApp
      * Ingenieria y Construcciones Santa Fe S.A
      * Creado por: Leandro Pavez
-     * Fecha de actualizacion: 13-11-2018
+     * Fecha de actualizacion: 18-07-2019
      */
-
+    private BluetoothAdapter mBluetoothAdapter;
     DatabaseHelper myDB;
     private Cursor fila;
     private Cursor fila2;
@@ -35,12 +42,19 @@ public class MainActivity extends AppCompatActivity {
         myDB = new DatabaseHelper(this);
         myDB = new DatabaseHelper(this);
 
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent,1);
+        }
+
         btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view){
                         IniciarSesion();
                     }
                 });
+
     }
 
     public void crearusuario(){
@@ -61,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
         String usuario=et1.getText().toString();
         String pass=et2.getText().toString();
 
-        fila=db.rawQuery("SELECT usuario,password FROM usuario WHERE usuario='"+usuario+"' and password='"+pass+"'",null);
-        fila2=db.rawQuery("SELECT nombre,apellido FROM usuario WHERE usuario='"+usuario+"'",null);
+        fila=db.rawQuery("SELECT usuario,password,nombre,apellido FROM usuario WHERE usuario='"+usuario+"' and password='"+pass+"'",null);
 
         if (fila.moveToFirst()==true){
 
@@ -70,16 +83,16 @@ public class MainActivity extends AppCompatActivity {
             String passw=fila.getString(1);
 
             if (usuario.equals(usua)&&pass.equals(passw)){
-                if (fila2.moveToFirst()==true){
-                    String nom=fila2.getString(0);
-                    String ape=fila2.getString(1);
-                    Intent nuevoform= new Intent(MainActivity.this, Menu.class);
-                    nuevoform.putExtra("NOMBRE",nom);
-                    nuevoform.putExtra("APELLIDO",ape);
-                    startActivity(nuevoform);
-                }
+                String nom=fila.getString(2);
+                String ape=fila.getString(3);
 
-
+                SharedPreferences preferences = getSharedPreferences("credenciales",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("nombre",nom);
+                editor.putString("apellido",ape);
+                editor.commit();
+                Intent nuevoform= new Intent(MainActivity.this, Menu.class);
+                startActivity(nuevoform);
                 et1.setText("");
                 et2.setText("");
                 et1.findFocus();

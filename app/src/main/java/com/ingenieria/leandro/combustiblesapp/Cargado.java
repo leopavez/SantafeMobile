@@ -1,4 +1,4 @@
-package com.example.leandro.combustiblesapp;
+package com.ingenieria.leandro.combustiblesapp;
 
 public class Cargado {
 
@@ -13,13 +13,13 @@ public class Cargado {
     String estado= "";
     String odometro="";
     String lcargados="";
-    String qrecibe="";
+    String qcarga="";
 
     public Cargado() {
 
     }
 
-    public Cargado(String id_estatico, String solicitud, String unegocio, String fentrega, String hentrega, String patente, String tvehiculo, String ubicacion, String estado, String odometro, String lcargados, String qrecibe) {
+    public Cargado(String id_estatico, String solicitud, String unegocio, String fentrega, String hentrega, String patente, String tvehiculo, String ubicacion, String estado, String odometro, String lcargados, String qcarga) {
         this.id_estatico = id_estatico;
         this.solicitud = solicitud;
         this.unegocio = unegocio;
@@ -31,7 +31,7 @@ public class Cargado {
         this.estado = estado;
         this.odometro = odometro;
         this.lcargados = lcargados;
-        this.qrecibe = qrecibe;
+        this.qcarga = qcarga;
     }
 
     public String getId_estatico() {
@@ -122,12 +122,12 @@ public class Cargado {
         this.lcargados = lcargados;
     }
 
-    public String getQrecibe(){
-        return qrecibe;
+    public String getQcarga() {
+        return qcarga;
     }
 
-    public void setQrecibe(String qrecibe){
-        this.qrecibe = qrecibe;
+    public void setQcarga(String qcarga) {
+        this.qcarga = qcarga;
     }
 }
 

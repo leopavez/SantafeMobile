@@ -7,7 +7,7 @@
     android:background="#ededed"
     android:layout_height="match_parent"
     android:id="@+id/flcontent"
-    tools:context="com.example.leandro.combustiblesapp.MainActivity">
+    tools:context="com.ingenieria.leandro.combustiblesapp.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"

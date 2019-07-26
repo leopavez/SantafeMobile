@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.ingenieria.leandro.combustiblesapp.Ajustes">
-
+    android:background="#fcfcfc">
 
     <LinearLayout
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp">
 
         <android.support.v7.widget.CardView
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:id="@+id/ajustesImpresoraCard"
+            android:id="@+id/mis_cargas"
             android:layout_width="160dp"
             android:layout_height="190dp"
             android:layout_margin="10dp">
@@ -40,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:text="Selección de impresora"/>
+                    android:text="Mis Cargas"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -50,17 +48,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Selecciona y configura la impresora."
+                    android:text="Visualiza e imprime tus cargas del día."
                     android:padding="5dp"
                     android:textColor="@android:color/darker_gray"/>
-
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:id="@+id/AjustesSurtidorCard"
+            android:id="@+id/resumen_diario_card"
             android:layout_width="160dp"
             android:layout_height="190dp"
             android:layout_margin="10dp">
@@ -73,14 +70,14 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/cercleshape"
-                    android:src="@drawable/ic_local_gas_station_black_24dp"
+                    android:src="@drawable/ic_assessment_black_24dp"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:text="Selección de surtidor"/>
+                    android:text="Resumen diario"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -90,13 +87,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Selecciona el surtidor en el cual te encuentras."
+                    android:text="Imprime el resumen de cargas del dia actual."
                     android:padding="5dp"
                     android:textColor="@android:color/darker_gray"/>
-
             </LinearLayout>
         </android.support.v7.widget.CardView>
-
-
     </LinearLayout>
+
 </LinearLayout>

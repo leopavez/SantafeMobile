@@ -1,4 +1,4 @@
-package com.example.leandro.combustiblesapp;
+package com.ingenieria.leandro.combustiblesapp;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -115,7 +115,5 @@ public class listadosolicitud extends AppCompatActivity {
                     "Ubicacion: "+listasolicitudes.get(i).getUbicacion());
 
         }
-
-
     }
 }

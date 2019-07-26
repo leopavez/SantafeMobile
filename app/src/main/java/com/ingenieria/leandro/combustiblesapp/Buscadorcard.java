@@ -1,4 +1,4 @@
-package com.example.leandro.combustiblesapp;
+package com.ingenieria.leandro.combustiblesapp;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -48,13 +48,8 @@ public class Buscadorcard extends AppCompatActivity {
         btnvolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = getIntent();
-                Bundle extras = intent.getExtras();
-                final String nom = extras.getString("NOM");
-                final String ape = extras.getString("APEL");
+
                 Intent nuevoform= new Intent(Buscadorcard.this, Menu.class);
-                nuevoform.putExtra("NOMBRE",nom);
-                nuevoform.putExtra("APELLIDO",ape);
                 startActivity(nuevoform);
             }
         });
@@ -62,13 +57,7 @@ public class Buscadorcard extends AppCompatActivity {
         verlistado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = getIntent();
-                Bundle extras = intent.getExtras();
-                final String nom = extras.getString("NOM");
-                final String ape = extras.getString("APEL");
                 Intent nuevoform= new Intent(Buscadorcard.this, ListadoCard.class);
-                nuevoform.putExtra("NOM",nom);
-                nuevoform.putExtra("APEL",ape);
                 startActivity(nuevoform);
             }
         });
@@ -161,10 +150,6 @@ public class Buscadorcard extends AppCompatActivity {
                         sol.setUbicacion(cursor.getString(5));
                         sol.setTvehiculo(cursor.getString(6));
                         sol.setQrecibe(cursor.getString(7));
-                        Intent intent = getIntent();
-                        Bundle extras = intent.getExtras();
-                        final String nom = extras.getString("NOM");
-                        final String ape = extras.getString("APEL");
                         String pa=""+sol.getPatente();
                         String litros=""+sol.getLasignados();
                         String ope=""+sol.getQrecibe();
@@ -181,8 +166,6 @@ public class Buscadorcard extends AppCompatActivity {
                         nuevoform.putExtra("TIPOVEHICULO",tipov);
                         nuevoform.putExtra("OBRA",obra);
                         nuevoform.putExtra("S",s);
-                        nuevoform.putExtra("NOMBR",nom);
-                        nuevoform.putExtra("APELL",ape);
                         nuevoform.putExtra("ID_ES",id_e);
                         startActivity(nuevoform);
                     }
@@ -236,14 +219,8 @@ public class Buscadorcard extends AppCompatActivity {
 
         }else{
             if(cursor.moveToFirst()==true){
-                Intent intent = getIntent();
-                Bundle extras = intent.getExtras();
-                final String nom = extras.getString("NOM");
-                final String ape = extras.getString("APEL");
                 Intent nuevoform= new Intent(Buscadorcard.this, listadosolicitud.class);
                 nuevoform.putExtra("SOLICITUDXBUSCAR",s);
-                nuevoform.putExtra("NOM",nom);
-                nuevoform.putExtra("APEL",ape);
                 startActivity(nuevoform);
             }else{
                 Toast.makeText(getApplicationContext(),"NO SE ENCONTRO LA SOLICITUD",Toast.LENGTH_SHORT).show();

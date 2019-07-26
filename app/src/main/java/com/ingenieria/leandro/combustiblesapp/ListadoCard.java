@@ -1,4 +1,4 @@
-package com.example.leandro.combustiblesapp;
+package com.ingenieria.leandro.combustiblesapp;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -52,9 +52,6 @@ public class ListadoCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listadocard);
         getSupportActionBar().hide();
-       //patentes= (TextView) findViewById(R.id.patentestxt);
-        //asignados= (TextView) findViewById(R.id.listrosasignados);
-        //ubicacion= (TextView)findViewById(R.id.ubicacion);
         lista = (ListView)findViewById(R.id.Listacard);
 
         myDB = new DatabaseHelper(this);
@@ -68,10 +65,7 @@ public class ListadoCard extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 
-                    Intent intent = getIntent();
-                    Bundle extras = intent.getExtras();
-                    final String nom = extras.getString("NOM");
-                    final String ape = extras.getString("APEL");
+
                     String patente=""+listasolicitudes.get(pos).getPatente();
                     String litros=""+listasolicitudes.get(pos).getLasignados();
                     String ope=""+listasolicitudes.get(pos).getQrecibe();
@@ -89,9 +83,6 @@ public class ListadoCard extends AppCompatActivity {
                     nuevoform.putExtra("OBRA",obra);
                     nuevoform.putExtra("S",s);
                     nuevoform.putExtra("ID_ES",id_es);
-                    nuevoform.putExtra("NOMBR",nom);
-                    nuevoform.putExtra("APELL",ape);
-
 
                     startActivity(nuevoform);
             }
@@ -103,7 +94,6 @@ public class ListadoCard extends AppCompatActivity {
 
     private void consultarlistadodeldia(){
         SQLiteDatabase db = myDB.getReadableDatabase();
-        Solicitudes sol = null;
         String estado="PENDIENTE";
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         Date date = new Date();
@@ -122,7 +112,6 @@ public class ListadoCard extends AppCompatActivity {
             sol.setUbicacion(cursor.getString(5));
             sol.setTvehiculo(cursor.getString(6));
             sol.setQrecibe(cursor.getString(7));
-
             listasolicitudes.add(sol);
 
         }
@@ -139,7 +128,6 @@ public class ListadoCard extends AppCompatActivity {
                             "Patente: "+listasolicitudes.get(i).getPatente()+"\n"+
                             "Litros: "+listasolicitudes.get(i).getLasignados()+"\n"+
                             "Ubicacion: "+listasolicitudes.get(i).getUbicacion());
-
         }
 
 

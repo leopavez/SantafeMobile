@@ -29,4 +29,13 @@
     <string name="title_other_devices">Other useful equipment</string>
     <string name="button_scan">Scanning device</string>
 
+    <string-array name="surtidores">
+        <item>KFHD13</item>
+        <item>GBSP72</item>
+        <item>FHGS44</item>
+        <item>MAPEL</item>
+        <item>MOLINA</item>
+        <item>COPEC</item>
+    </string-array>
+
 </resources>
