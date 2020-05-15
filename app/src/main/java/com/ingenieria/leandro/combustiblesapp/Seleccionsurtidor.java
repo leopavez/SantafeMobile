@@ -71,9 +71,7 @@ public class Seleccionsurtidor extends AppCompatActivity {
         myDB = new DatabaseHelper(this);
 
         listView = (ListView)findViewById(R.id.listview);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.surtidores,android.R.layout.simple_list_item_1);
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        listView.setAdapter(adapter);
+        cargaSurtidores();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,75 +80,26 @@ public class Seleccionsurtidor extends AppCompatActivity {
                 final String surtidor = (listView.getItemAtPosition(i).toString());
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Seleccionsurtidor.this);
-                builder.setTitle("Confirmar surtidor: "+surtidor);
-                builder.setMessage("¿Estas seguro de confirmar el surtidor?");
-                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                builder.setTitle("Confirmar Surtidores: "+surtidor);
+                builder.setMessage("¿Estas seguro de confirmar el Surtidores?");
+                builder.setPositiveButton("Aceptar",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        SharedPreferences preferences = getSharedPreferences("surtidor",Context.MODE_PRIVATE);
+                        SharedPreferences preferences = getSharedPreferences("Surtidores",Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
 
-                        if (surtidor.equalsIgnoreCase("KFHD13")){
-                            String idsurtidor = "2";
+                        SQLiteDatabase db = myDB.getWritableDatabase();
+                        Cursor cursor = db.rawQuery("SELECT id_comb FROM surtidores WHERE patente='"+surtidor+"' ",null);
+
+                        if (cursor.moveToFirst()){
+                            String idsurtidor = cursor.getString(0);
                             editor.putString("idsurtidor",idsurtidor);
                             editor.commit();
                             descargaInmediata(idsurtidor);
-                            Toast.makeText(getApplicationContext(), "Tu surtidor se configuro: KFHD13", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Tu surtidor se configuro: "+surtidor, Toast.LENGTH_SHORT).show();
                             Intent nuevoform= new Intent(Seleccionsurtidor.this, Menu.class);
                             startActivity(nuevoform);
-                        }else{
-                            if (surtidor.equalsIgnoreCase("GBSP72")){
-                                String idsurtidor = "1";
-                                editor.putString("idsurtidor",idsurtidor);
-                                editor.commit();
-                                descargaInmediata(idsurtidor);
-                                Toast.makeText(getApplicationContext(), "Tu surtidor se configuro: GBSP72", Toast.LENGTH_SHORT).show();
-                                Intent nuevoform= new Intent(Seleccionsurtidor.this, Menu.class);
-                                startActivity(nuevoform);
-                            }else{
-                                if (surtidor.equalsIgnoreCase("FHGS44")){
-                                    String idsurtidor = "7";
-                                    editor.putString("idsurtidor",idsurtidor);
-                                    editor.commit();
-                                    descargaInmediata(idsurtidor);
-                                    Toast.makeText(getApplicationContext(), "Tu surtidor se configuro: FHGS44", Toast.LENGTH_SHORT).show();
-                                    Intent nuevoform= new Intent(Seleccionsurtidor.this, Menu.class);
-                                    startActivity(nuevoform);
-                                }
-                                else{
-                                    if (surtidor.equalsIgnoreCase("MAPEL")){
-                                        String idsurtidor = "4";
-                                        editor.putString("idsurtidor",idsurtidor);
-                                        editor.commit();
-                                        descargaInmediata(idsurtidor);
-                                        Toast.makeText(getApplicationContext(), "Tu surtidor se configuro: MAPEL", Toast.LENGTH_SHORT).show();
-                                        Intent nuevoform= new Intent(Seleccionsurtidor.this, Menu.class);
-                                        startActivity(nuevoform);
-                                    }else{
-                                        if (surtidor.equalsIgnoreCase("MOLINA")){
-                                            String idsurtidor = "6";
-                                            editor.putString("idsurtidor",idsurtidor);
-                                            editor.commit();
-                                            descargaInmediata(idsurtidor);
-                                            Toast.makeText(getApplicationContext(), "Tu surtidor se configuro: MOLINA", Toast.LENGTH_SHORT).show();
-                                            Intent nuevoform= new Intent(Seleccionsurtidor.this, Menu.class);
-                                            startActivity(nuevoform);
-                                        }
-                                        else{
-                                            if (surtidor.equalsIgnoreCase("COPEC")){
-                                                String idsurtidor = "3";
-                                                editor.putString("idsurtidor",idsurtidor);
-                                                editor.commit();
-                                                descargaInmediata(idsurtidor);
-                                                Toast.makeText(getApplicationContext(), "Tu surtidor se configuro: COPEC", Toast.LENGTH_SHORT).show();
-                                                Intent nuevoform= new Intent(Seleccionsurtidor.this, Menu.class);
-                                                startActivity(nuevoform);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
                         }
                     }
                 });
@@ -163,6 +112,22 @@ public class Seleccionsurtidor extends AppCompatActivity {
                 builder.show();
             }
         });
+    }
+
+
+    private void cargaSurtidores() {
+        ArrayList<String>surtidores = new ArrayList<>();
+
+        SQLiteDatabase db = myDB.getReadableDatabase();
+        final Cursor c = db.rawQuery("SELECT patente AS _id,patente FROM surtidores", null);
+        c.moveToFirst();
+        while (!c.isAfterLast()){
+            surtidores.add(c.getString(c.getColumnIndex("patente")));
+            c.moveToNext();
+        }
+        ArrayAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,surtidores);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        listView.setAdapter(adapter);
     }
 
     public void descargaInmediata(String idsurtidor){
@@ -201,6 +166,7 @@ public class Seleccionsurtidor extends AppCompatActivity {
 
 
                             SQLiteDatabase db = myDB.getWritableDatabase();
+                            db.execSQL("DELETE FROM listado");
                             Cursor cursor = db.rawQuery("SELECT * FROM listado WHERE id_estatico='"+sol.id_estatico+"'",null);
                             boolean esta=true;
 

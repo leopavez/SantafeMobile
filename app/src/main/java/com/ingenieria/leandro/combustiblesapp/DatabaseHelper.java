@@ -2,6 +2,7 @@ package com.ingenieria.leandro.combustiblesapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -34,12 +35,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     final String CREAR_TABLA_LISTADO="CREATE TABLE listado (id_estatico TEXT unique, solicitud TEXT, unegocio TEXT, fentrega TEXT, patente TEXT, tipo_vehiculo TEXT, ubicacion TEXT, litros TEXT, lasignados TEXT, qrecibe TEXT,estado TEXT)";
     final String CREAR_TABLA_CARGADO="CREATE TABLE cargado (id_estatico TEXT, solicitud TEXT, unegocio TEXT, fentrega TEXT, hentrega TEXT, patente TEXT, tipo_vehiculo TEXT, ubicacion TEXT,estado TEXT,odometro TEXT, lcargados TEXT, qcarga TEXT)";
-    final String CREAR_TABLA_USUARIO="CREATE TABLE usuario (id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, usuario TEXT unique, password TEXT, nombre TEXT, apellido TEXT)";
-    final String PARAMETROS_SURTIDOR="CREATE TABLE surtidor (id INTEGER PRIMARY KEY AUTOINCREMENT, id_surtidor TEXT)";
-    final String PARAMETROS_IMPRESORA="CREATE TABLE impresora (id INTEGER PRIMARY KEY AUTOINCREMENT, mascara TEXT)";
+    final String CREAR_TABLA_USUARIO="CREATE TABLE usuario (id INTEGER, usuario TEXT unique, password TEXT, nombre TEXT, apellido TEXT)";
+    final String CREAR_TABLA_SURTIDOR="CREATE TABLE surtidores(id INTEGER, patente TEXT unique, id_comb TEXT)";
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override
@@ -47,37 +47,81 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREAR_TABLA_LISTADO);
         db.execSQL(CREAR_TABLA_USUARIO);
         db.execSQL(CREAR_TABLA_CARGADO);
-        db.execSQL(PARAMETROS_SURTIDOR);
-        db.execSQL(PARAMETROS_IMPRESORA);
+        db.execSQL(CREAR_TABLA_SURTIDOR);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
 
-        db.execSQL("DROP TABLE IF EXISTS listado");
         db.execSQL("DROP TABLE IF EXISTS usuario");
-        db.execSQL("DROP TABLE IF EXISTS cargado");
         db.execSQL("DROP TABLE IF EXISTS surtidor");
         db.execSQL("DROP TABLE IF EXISTS impresora");
 
         db.execSQL(CREAR_TABLA_USUARIO);
-        db.execSQL(CREAR_TABLA_LISTADO);
-        db.execSQL(CREAR_TABLA_CARGADO);
-        db.execSQL(PARAMETROS_SURTIDOR);
-        db.execSQL(PARAMETROS_IMPRESORA);
+        db.execSQL(CREAR_TABLA_SURTIDOR);
     }
 
-    public boolean eliminardatos(){
-        try{
+    public boolean RegistroSurtidores(String id,String patente, String id_comb ){
+        try {
 
             SQLiteDatabase db = this.getWritableDatabase();
-            db.delete("listado","1",null);
+
+            ContentValues contentValues = new ContentValues();
+
+            contentValues.put("id", id );
+            contentValues.put("patente",patente);
+            contentValues.put("id_comb",id_comb);
+
+            db.insert("surtidores",null,contentValues);
+
             return true;
         }catch (Exception e){
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean RegistroUsuarios(String id,String usuario, String nombre, String apellido, String password ){
+        try {
+
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            ContentValues contentValues = new ContentValues();
+
+            contentValues.put("id", id );
+            contentValues.put("usuario",usuario);
+            contentValues.put("nombre",nombre);
+            contentValues.put("apellido",apellido);
+            contentValues.put("password",password);
+
+            db.insert("usuario",null,contentValues);
+            db.close();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean ExisteUsuario(String id){
+        boolean UsuarioExiste = false;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT nombre FROM usuario WHERE id = '"+id+"'",null);
+        try {
+
+            if (cursor.getCount()<=0){
+
+                UsuarioExiste = false;
+            }else{
+
+                UsuarioExiste = true;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return UsuarioExiste;
     }
 
     public boolean insertDataListado(String id_estatico, String solicitud, String unegocio, String fecha, String patente, String tipo_vehiculo, String ubicacion, String litros, String lasignados, String qrecibe, String estado) {
@@ -107,34 +151,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
 
-    }
-
-    public boolean insertSurtidor(String id_surtidor){
-
-        try {
-            SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(idsurtidor,id_surtidor);
-            db.insert("surtidor",null,contentValues);
-            return true;
-
-        }catch (Exception exp) {
-            exp.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean insertarImpresoraMask(String address){
-        try{
-            SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(mascara,address);
-            db.insert("impresora",null,contentValues);
-            return true;
-        }catch (Exception exp){
-            exp.printStackTrace();
-            return false;
-        }
     }
 
 }

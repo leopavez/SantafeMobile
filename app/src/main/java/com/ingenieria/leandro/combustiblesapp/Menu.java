@@ -136,8 +136,6 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public class Actualizar extends AsyncTask<Void, Integer, Boolean> {
@@ -167,7 +165,7 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
      */
     public void actualizacionlistado() {
 
-        SharedPreferences preferences = getSharedPreferences("surtidor", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("Surtidores", Context.MODE_PRIVATE);
         String idsurtidor = preferences.getString("idsurtidor", "SIN SURTIDOR");
 
         String urlActualizacion = urlDescargaListado + "/" + fecha + "/" + idsurtidor;
@@ -261,7 +259,6 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
             car.setHentrega(cursor.getString(4));
             car.setQcarga(cursor.getString(5));
             listacargado.add(car);
-
         }
         for (int i = 0; i < listacargado.size(); i++) {
 

@@ -269,7 +269,40 @@ public class Main_Activity extends Activity implements Runnable {
 
                         Thread.sleep(8000);
 
+
+
                         String msg3 = " " + " " + " " + " " + " " + " " + " " + "Entrega petroleo " + " " + " " + " " + "\n" +
+                                " " + " " + " " + " " + " " + " " + " " + "N Vale: " + id_estatico + " " + " " + " " + "\n" +
+                                " " + "\n" +
+                                " " + "Fecha: " + fecha + " " + hora + "\n" +
+                                " " + "Patente: " + patente + "\n" +
+                                " " + "Solicitud: " + solicitud + "\n" +
+                                " " + "Obra: " + obra + "\n" +
+                                " " + "L. Asignados: " + asignados + "\n" +
+                                " " + "L. Cargados: " + cargados + "\n" +
+                                " " + "Entregado: " + cargadopor + "\n" +
+                                " " + "Odometro: " + odometro + "\n" +
+                                " " + "\n" +
+                                " " + "\n" +
+                                " " + "RUT:..........................." + "\n" +
+                                " " + "\n" +
+                                " " + "\n" +
+                                " " + "Nombre:........................" + "\n" +
+                                " " + "\n" +
+                                " " + "\n" +
+                                " " + "Firma:........................." + "\n" +
+                                " " + "\n" +
+                                " " + "\n" +
+                                " " + " " + " " + " " + " " + " " + " " + "Copia departamento " + " " + " " + " " + "\n" +
+                                " " + "\n" +
+                                " " + "\n" +
+                                " " + "\n";
+
+                        os.write(msg3.getBytes());
+
+                        Thread.sleep(8000);
+
+                        String msg4 = " " + " " + " " + " " + " " + " " + " " + "Entrega petroleo " + " " + " " + " " + "\n" +
                                 " " + " " + " " + " " + " " + " " + " " + "N Vale: " + id_estatico + " " + " " + " " + "\n" +
                                 " " + "\n" +
                                 " " + "Fecha: " + fecha + " " + hora + "\n" +
@@ -286,7 +319,7 @@ public class Main_Activity extends Activity implements Runnable {
                                 " " + "\n" +
                                 " " + "\n";
 
-                        os.write(msg3.getBytes());
+                        os.write(msg4.getBytes());
                         mBluetoothSocket.close();
                     } else {
                         mBluetoothSocket.close();
@@ -295,7 +328,7 @@ public class Main_Activity extends Activity implements Runnable {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
+                 }
             }
         });
         t.start();

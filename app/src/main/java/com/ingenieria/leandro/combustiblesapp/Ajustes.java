@@ -27,7 +27,6 @@ public class Ajustes extends AppCompatActivity implements View.OnClickListener {
         getSupportActionBar().hide();
         seleccion_impresora = (CardView)findViewById(R.id.ajustesImpresoraCard);
         seleccion_surtidor = (CardView)findViewById(R.id.AjustesSurtidorCard);
-
         seleccion_surtidor.setOnClickListener(this);
         seleccion_impresora.setOnClickListener(this);
 

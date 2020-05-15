@@ -47,7 +47,7 @@ public class listadocargado extends AppCompatActivity {
     private BluetoothSocket mBluetoothSocket;
     BluetoothDevice mBluetoothDevice;
 
-    ArrayList<Cargado> listacargado;
+    ArrayList<Cargado>listacargado;
     ArrayList<String> listacargadosdeldia;
     Cargado car = new Cargado();
 
